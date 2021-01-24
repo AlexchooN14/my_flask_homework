@@ -31,5 +31,25 @@ def hello_world():
     return 'Hello World!'
 
 
+@app.route('/cars')
+def cars():
+    return render_template("cars_main.html")
+
+
+@app.route('/cars/germany')
+def germany():
+    return render_template("ZaGermaniq.html")
+
+
+@app.route('/cars/america')
+def america():
+    return render_template("ZaAmerika.html")
+
+
+@app.route('/cars/japan')
+def japan():
+    return render_template("ZaJapan.html")
+
+
 if __name__ == '__main__':
     app.run()

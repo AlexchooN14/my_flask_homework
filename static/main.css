@@ -7,7 +7,7 @@ html, body {
 
 
 .header {
-    background-image: url("/templates/photos cars/merc_png.png");
+    background-image: url("photos cars/HeadingMerc.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -113,7 +113,7 @@ html, body {
 
 
 .header1 {
-    background-image: url("/templates/photos cars/flag.jpg");
+    background-image: url("/static/photos cars/flag.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -165,7 +165,7 @@ html, body {
 }
 
 .header2 {
-    background-image: url("/templates/photos cars/american-flag-hd.jpg");
+    background-image: url("/static/photos cars/american-flag-hd.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -182,7 +182,7 @@ html, body {
 }
 
 .header3 {
-    background-image: url("/templates/photos cars/Japan Flag.jpg");
+    background-image: url("/static/photos cars/Japan Flag.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -199,7 +199,7 @@ html, body {
 }
 
 .header4 {
-    background-image: url("/templates/photos cars/american-flag-hd.jpg");
+    background-image: url("/static/photos cars/Toyota supra.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
