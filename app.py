@@ -1,34 +1,31 @@
-from flask import Flask, request, render_template
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+from flask import render_template, request, redirect, url_for
+from flask_httpauth import HTTPBasicAuth
+import logging
+
+from post import Post
+from user import User
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqllite:////tmp/test.db'
-db = SQLAlchemy(app)
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(30), unique=False, nullable=False)
+auth = HTTPBasicAuth()
 
-    def __repr__(self):
-        return '<User %r' % self.username
+logging.basicConfig(filename='logs', format='%(levelname)s  %(asctime)s : %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 
 
-@app.route('/register', methods=["POST", "GET"])
-def register():
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-        User(username=username, password=password)
-    return render_template("register.html")
+# @app.route('/register', methods=["POST", "GET"])
+# def register():
+#     if request.method == "POST":
+#         username = request.form.get("username")
+#         password = request.form.get("password")
+#         User(username=username, password=password)
+#     return render_template("register.html")
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def main():
+    return render_template("main.html")
 
 
 @app.route('/cars')
@@ -49,6 +46,30 @@ def america():
 @app.route('/cars/japan')
 def japan():
     return render_template("ZaJapan.html")
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    elif request.method == 'POST':
+        values = (
+            None,
+            request.form['username'],
+            User.hash_password(request.form['password'])
+        )
+        User(*values).create()
+
+        return redirect('/')
+
+
+@auth.verify_password
+def verify_password(username, password):
+    user = User.find_by_username(username)
+    if user:
+        return user.verify_password(password)
+
+    return False
 
 
 if __name__ == '__main__':
