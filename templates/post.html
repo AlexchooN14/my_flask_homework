@@ -1,0 +1,15 @@
+<title>Post</title>
+<script src="{{url_for('static', filename='comments.js')}}"></script>
+<h1>{{ post.name }}</h1>
+<h2>{{ post.author }}</h2>
+
+<hr>
+<p>
+{{ post.content }}
+</p>
+
+<a href="/posts/{{ post.post_id }}/edit">Edit post</a><br/><br/>
+<form action="/posts/{{ post.post_id }}/delete" method="post">
+  <button type="submit">Delete post</button>
+</form>
+<br/>

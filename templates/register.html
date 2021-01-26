@@ -1,10 +1,84 @@
-<form action="/register" method="post">
-  <label>Username</label>
-  <input name="username" type="text"/>
-  </br>
-  <label>Password</label>
-  <input name="password" type="password"/>
-  </br>
-  </br>
-  <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Register</title>
+<style>
+.logo {
+    font-size: 65px;
+    transition-timing-function: ease-out;
+    text-align: center;
+    padding-top: 100px;
+    -webkit-animation-duration: 10s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.helloThere {
+    font-size: 30px;
+    transition-timing-function: ease-in;
+    text-align: center;
+    padding-bottom: 10px;
+    -webkit-animation-duration: 10s;
+    animation-duration: 2.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+
+@-webkit-keyframes fadeInDown {
+    0% {
+       opacity: 0;
+       -webkit-transform: translateY(-20px);
+    }
+    100% {
+       opacity: 1;
+       -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+       opacity: 0;
+       transform: translateY(-20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+</style>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+<div class="logo fadeInDown">ForumForEverything</div>
+<div class="helloThere fadeInDown">Hello there</div>
+
+<div class="container">
+  <form action="/register" method="post">
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input name="username" class="form-control" type="text"/>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input name="password" class="form-control" type="password"/>
+    </div>
+      <button class="btn btn-dark" type="submit" value="Submit">Submit</button>
+  </form>
+</div>
+
+
+</body>
+</html>
