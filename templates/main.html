@@ -8,15 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<style>
-.modal.fade .modal-dialog {
-  transform: translate3d(0, 100vh, 0);
-}
-
-.modal.in .modal-dialog {
-  transform: translate3d(0, 0, 0);
-}
-</style>
 
 </head>
 <body>
@@ -34,11 +25,16 @@
     </ul>
 
       <ul class="nav navbar-nav navbar-right">
-      <a href="/posts/new" class="btn btn-danger navbar-btn" title="Add Publication" role="button">+</a>
+      <a href="/newtopic" class="btn btn-danger navbar-btn" title="Add Topic" role="button">+</a>
     </ul>
 
   </div>
 </nav>
+
+{% for topic in topics %}
+<a href="/posts/{{ topic.id }}"><b>Name:</b> {{ topic.name }} | Description: {{ topic.description }}</a>
+<br/>
+{% endfor %}
 
 <div class="container">
   <h3>Basic Navbar Example</h3>

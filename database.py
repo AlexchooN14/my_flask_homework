@@ -1,46 +1,15 @@
-import sqlite3
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-DB_NAME = 'example.db'
-
-conn = sqlite3.connect(DB_NAME)
-
-
-conn.cursor().execute('''
-    CREATE TABLE IF NOT EXISTS posts 
-    (
-        post_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        name TEXT, 
-        author TEXT, 
-        content TEXT
-    )
-''')
-
-# conn.cursor().execute('''
-# CREATE TABLE IF NOT EXISTS comments
-#     (
-#         comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         post_id INTEGER,
-#         message TEXT,
-#         FOREIGN KEY(post_id) REFERENCES posts(id)
-#     )
-# ''')
-
-conn.cursor().execute('''
-CREATE TABLE IF NOT EXISTS users
-    (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
-    )
-''')
-
-conn.commit()
+engine = create_engine('sqlite:///example.db', convert_unicode=True)
+db_session = scoped_session(sessionmaker(autocommit=False,
+                                         autoflush=False,
+                                         bind=engine))
+Base = declarative_base()
+Base.query = db_session.query_property()
 
 
-class DB:
-    def __enter__(self):
-        self.conn = sqlite3.connect(DB_NAME)
-        return self.conn.cursor()
-
-    def __exit__(self, type, value, traceback):
-        self.conn.commit()
+def init_db():
+    Base.metadata.drop_all(bind=engine)  # remove later
+    Base.metadata.create_all(bind=engine)
