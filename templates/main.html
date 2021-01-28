@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-  <title>Forum</title>
+  <title>ForumForEverything</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/main.css">
 
+    <!---------- favicon ------------>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#f2f2f2">
+    <!---------- -------- ------------>
+
+
+    <style>
+        a:link{
+            word-wrap: break-word;
+        }
+    </style>
 
 </head>
 <body>
+
+
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
 
 
 <nav class="navbar navbar-default">
@@ -21,7 +58,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/register"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -31,15 +68,19 @@
   </div>
 </nav>
 
+<div class="container">
+  <h2>Add or choose a topic</h2>
+    <hr>
+    <br>
+</div>
+
 {% for topic in topics %}
-<a href="/posts/{{ topic.id }}"><b>Name:</b> {{ topic.name }} | Description: {{ topic.description }}</a>
+    <div class="container">
+        <a href="/posts/{{ topic.id }}"><b>Name:</b> {{ topic.name }} | Description: {{ topic.description }}</a>
+    </div>
 <br/>
 {% endfor %}
 
-<div class="container">
-  <h3>Basic Navbar Example</h3>
-  <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
-</div>
 
 </body>
 </html>

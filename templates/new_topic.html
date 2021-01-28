@@ -1,9 +1,58 @@
-<form action="/newtopic" method="post">
-  <label>Name</label>
-  <input name="name"/>
-  </br>
-  <label>Description</label>
-  <input name="description"/>
-  </br>
-  <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <title>New topic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/main.css">
+
+    <!---------- favicon ------------>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#f2f2f2">
+    <!---------- -------- ------------>
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">ForumForEverything</a>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Create new topic</h2>
+    <hr>
+    <br>
+</div>
+
+
+<div class="container">
+  <form action="/newtopic" method="post">
+    <div class="form-group">
+      <label>Name</label>
+      <input name="name" class="form-control" type="text"/>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <p class="font-weight-light text-muted">Please enter no more than 120 symbols.</p>
+      <textarea class="form-control" rows="5" name="description"></textarea>
+    </div>
+      <button class="btn btn-basic" type="submit" value="Submit">Submit</button>
+  </form>
+</div>
+
+
+</body>
+</html>

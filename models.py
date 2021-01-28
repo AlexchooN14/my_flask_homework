@@ -47,7 +47,7 @@ class Post(Base):
     __tablename__ = 'Post'
     id = Column(Integer, primary_key=True)
     name = Column(String(80), unique=True, nullable=False)
-    author = Column(String(120), nullable=False)
+    author = Column(String(90), nullable=False)
     content = Column(String(200), nullable=False)
     date = Column(DateTime(), default=datetime.datetime.now())
-    topic_id = Column(Integer, ForeignKey("Topic.id"))
+    topic_id = Column(Integer, ForeignKey('Topic.id'))
