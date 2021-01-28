@@ -58,13 +58,13 @@ def new_topic():
 
 @app.route('/posts/<int:topic_id>')
 def list_posts(topic_id):
-    return render_template('posts.html', posts=Post.query.filter_by(topic_id=topic_id).all(), topic=Topic.query.filter_by(id=topic_id).all(), topic_id=topic_id)
+    return render_template('posts.html', posts=Post.query.filter_by(topic_id=topic_id).all(), topic_id=topic_id)
 
 
 @app.route('/posts/<int:topic_id>/<int:post_id>')
 def show_post(topic_id, post_id):
     post = Post.query.filter_by(id=post_id, topic_id=topic_id).first()
-    return render_template('post.html', post=post)
+    return render_template('post.html', post=post, current_user=current_user)
 
 
 @app.route('/posts/<int:topic_id>/<int:post_id>/edit', methods=['GET', 'POST'])
@@ -78,7 +78,7 @@ def edit_post(topic_id, post_id):
         post.content = request.form['content']
         db_session.commit()
 
-        return redirect(url_for('show_post', post_id=post.post_id, topic_id=post.topic_id))
+        return redirect(url_for('show_post', post_id=post_id, topic_id=topic_id))
 
 
 @app.route('/posts/<int:topic_id>/<int:post_id>/delete', methods=['POST'])
@@ -121,6 +121,15 @@ def login():
             db_session.commit()
             login_user(user)
     return response
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    current_user.login_id = None
+    db_session.commit()
+    logout_user()
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':

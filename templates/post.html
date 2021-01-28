@@ -19,20 +19,58 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#f2f2f2">
     <!---------- -------- ------------>
-    <title>Post</title>
+
+
+    <style>
+        p{
+            word-wrap: break-word;
+        }
+    </style>
 
 </head>
-<script src="{{url_for('static', filename='comments.js')}}"></script>
-<h1>{{ post.name }}</h1>
-<h2>{{ post.author }}</h2>
+<body>
 
-<hr>
-<p>
-{{ post.content }}
-</p>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">ForumForEverything</a>
+    </div>
 
-<a href="/posts/{{ post.post_id }}/edit">Edit post</a><br/><br/>
-<form action="/posts/{{ post.post_id }}/delete" method="post">
-  <button type="submit">Delete post</button>
+    {% if current_user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+        </ul>
+    {% endif %}
+
+    {% if not current_user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    {% endif %}
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <h2>This is post {{ post.name }}</h2>
+    <h1>From author {{ post.author }}</h1>
+    <hr>
+    <br>
+</div>
+<div class="container">
+    <p>
+    {{ post.content }}
+    </p>
+
+    {% if post.author == current_user.username %}
+        <a href="/posts/{{ post.topic_id }}/{{ post.id }}/edit">Edit post</a><br/><br/>
+        <form action="/posts/{{ post.topic_id }}/{{ post.id }}/delete" method="post">
+        <button type="submit">Delete post</button>
+    {% endif %}
 </form>
+</div>
+
+</body>
 </html>

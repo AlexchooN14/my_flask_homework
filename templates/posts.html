@@ -50,10 +50,19 @@ function topFunction() {
       <a class="navbar-brand" href="/">ForumForEverything</a>
     </div>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
+    {% if current_user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+        </ul>
+    {% endif %}
+
+    {% if not current_user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    {% endif %}
+
 
       <ul class="nav navbar-nav navbar-right">
       <a href="/posts/{{ topic_id }}/new" class="btn btn-danger navbar-btn" title="Add Post" role="button">+</a>
@@ -70,10 +79,9 @@ function topFunction() {
 
 {% for post in posts %}
     <div class="container">
-        <a href="/posts/{{ topic.id }}/{{ post.id }}"><b>Name:</b> {{ post.name }} | <b>Author:</b> {{ post.author }}<br>
+        <a href="/posts/{{ topic_id }}/{{ post.id }}"><b>Name:</b> {{ post.name }} | <b>Author:</b> {{ post.author }}<br>
             <b>Content:</b> {{ post.content }} <br>
             <b>Released on date:</b> {{ post.date }} <br>
-            <b>From topic:</b> {{ topic.name }}  <!-- TODO: why this isn't working -->
         </a>
     </div>
 <br/>
